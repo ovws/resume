@@ -1,0 +1,443 @@
+/* ==========================================================================
+   Single Viewport 100vh Layout with Custom Font & Colorful Axis Bar
+   ========================================================================== */
+
+/* Custom Font Declaration */
+@font-face {
+  font-family: 'TXHuaGuan';
+  src: url('./fonts/TXHuaGuan-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Killed by Google Palette */
+  --kbg-bg: #fafafa;
+  --kbg-card-bg: #ffffff;
+  --kbg-text-main: #202124;
+  --kbg-text-sub: #5f6368;
+  --kbg-text-light: #80868b;
+  --kbg-border: #dadce0;
+  --kbg-border-hover: #1a73e8;
+
+  /* Accents */
+  --kbg-blue: #1a73e8;
+  --kbg-amber: #d97706;
+
+  /* Material Shadows */
+  --elevation-1: 0 1px 3px rgba(60, 64, 67, 0.12), 0 1px 2px rgba(60, 64, 67, 0.24);
+  --elevation-2: 0 4px 12px rgba(60, 64, 67, 0.15), 0 1px 3px rgba(60, 64, 67, 0.3);
+
+  /* Fonts: Use TXHuaGuan as primary font */
+  --font-main: 'TXHuaGuan', 'Roboto', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --timeline-width: 2200px;
+}
+
+/* Reset & Strict 100vh Single Screen Boundary */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--kbg-bg);
+  color: var(--kbg-text-main);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-viewport {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Top Hero Compact Section
+   -------------------------------------------------------------------------- */
+.compact-hero {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+}
+
+.hero-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.user-name {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--kbg-text-main);
+  letter-spacing: -0.01em;
+}
+
+.hero-sub-row {
+  font-size: 0.88rem;
+  color: var(--kbg-text-sub);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.dot-divider {
+  color: #bdc1c6;
+}
+
+.hero-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.action-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 14px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--kbg-border);
+  background: #ffffff;
+  color: var(--kbg-text-main);
+  text-decoration: none;
+  transition: all 0.15s ease;
+  font-family: var(--font-main);
+}
+
+.action-chip:hover {
+  background: #f1f3f4;
+  border-color: #bdc1c6;
+}
+
+.chip-primary {
+  background: var(--kbg-blue);
+  color: #ffffff;
+  border: none;
+}
+
+.chip-primary:hover {
+  background: #1557b0;
+}
+
+/* --------------------------------------------------------------------------
+   Center Timeline Viewport (Flex 1 to Fill Available Screen Height)
+   -------------------------------------------------------------------------- */
+.timeline-viewport-wrapper {
+  flex: 1 1 auto;
+  position: relative;
+  width: 100vw;
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  user-select: none;
+  z-index: 10;
+  scrollbar-width: none;
+}
+
+.timeline-viewport-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.timeline-viewport-wrapper:active {
+  cursor: grabbing;
+}
+
+.timeline-viewport-track {
+  position: relative;
+  width: var(--timeline-width);
+  height: 100%;
+  padding: 0 80px;
+}
+
+.timeline-inner-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* SVG Vector Overlay with Vibrant Gradient Axis */
+.kbg-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.svg-dot-group {
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.2s ease;
+}
+
+.svg-dot-group:hover {
+  transform: scale(1.3);
+}
+
+/* --------------------------------------------------------------------------
+   Timeline Cards Layer (Symmetrical Top & Bottom Placement)
+   -------------------------------------------------------------------------- */
+.cards-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.card-wrapper {
+  position: absolute;
+  width: 360px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  will-change: transform, opacity;
+}
+
+#node-0 { left: 80px; }
+#node-1 { left: 580px; }
+#node-2 { left: 1080px; }
+#node-3 { left: 1580px; }
+
+/* Symmetrical Placement relative to the 50% Timeline Axis line */
+.card-top {
+  bottom: calc(50% + 28px);
+}
+
+.card-bottom {
+  top: calc(50% + 28px);
+}
+
+.kbg-card {
+  position: relative;
+  background: var(--kbg-card-bg);
+  border: 1px solid var(--kbg-border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--elevation-1);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  will-change: transform;
+}
+
+.card-wrapper:hover .kbg-card {
+  border-color: var(--kbg-border-hover);
+  box-shadow: var(--elevation-2);
+  transform: translateY(-3px);
+}
+
+.card-featured {
+  border: 2px solid var(--kbg-blue);
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.time-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #f1f3f4;
+  color: var(--kbg-text-sub);
+}
+
+.badge-amber {
+  background: rgba(217, 119, 6, 0.1);
+  color: var(--kbg-amber);
+}
+
+.badge-blue {
+  background: rgba(26, 115, 232, 0.1);
+  color: var(--kbg-blue);
+}
+
+.type-tag {
+  font-size: 0.7rem;
+  color: var(--kbg-text-light);
+}
+
+.tag-amber { color: var(--kbg-amber); font-weight: 500; }
+.tag-blue { color: var(--kbg-blue); font-weight: 500; }
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--kbg-text-main);
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+
+.card-role {
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--kbg-blue);
+  margin-bottom: 8px;
+}
+
+.role-amber { color: var(--kbg-amber); }
+.role-blue { color: var(--kbg-blue); }
+
+.card-desc {
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--kbg-text-sub);
+  margin-bottom: 10px;
+}
+
+.card-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.pill {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #f1f3f4;
+  color: var(--kbg-text-sub);
+}
+
+.pill-amber {
+  background: rgba(217, 119, 6, 0.1);
+  color: var(--kbg-amber);
+}
+
+.pill-blue {
+  background: rgba(26, 115, 232, 0.1);
+  color: var(--kbg-blue);
+}
+
+/* Spotlight dimming */
+.cards-container.has-active .card-wrapper:not(.is-active) {
+  opacity: 0.35;
+}
+
+/* --------------------------------------------------------------------------
+   Bottom Quick Navigation Bar
+   -------------------------------------------------------------------------- */
+.footer-nav {
+  flex: 0 0 auto;
+  padding-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  z-index: 90;
+}
+
+.nav-pills {
+  background: #ffffff;
+  border: 1px solid var(--kbg-border);
+  padding: 4px 14px;
+  border-radius: 20px;
+  box-shadow: var(--elevation-1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-node-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  color: var(--kbg-text-sub);
+  font-size: 0.76rem;
+  font-family: var(--font-main);
+  cursor: pointer;
+  padding: 3px 8px;
+  border-radius: 10px;
+  transition: all 0.15s ease;
+}
+
+.nav-node-btn:hover,
+.nav-node-btn.active {
+  color: var(--kbg-text-main);
+  background: #f1f3f4;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #bdc1c6;
+}
+
+.dot-amber { background: var(--kbg-amber); }
+.dot-blue { background: var(--kbg-blue); }
+
+.nav-node-btn.active .dot {
+  background: var(--kbg-blue);
+  transform: scale(1.3);
+}
+
+.sep {
+  width: 12px;
+  height: 1px;
+  background: var(--kbg-border);
+}
+
+/* Print */
+.print-container { display: none; }
+@media print {
+  body * { visibility: hidden; }
+  .print-container, .print-container * { visibility: visible; }
+  .print-container {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    background: #ffffff;
+    color: #000;
+  }
+  .print-header { border-bottom: 2px solid #000; padding-bottom: 12px; margin-bottom: 20px; }
+  .print-header h2 { font-size: 20px; }
+  .print-section { margin-bottom: 20px; }
+  .print-section-title { font-size: 14px; border-bottom: 1px solid #ccc; padding-bottom: 4px; margin-bottom: 10px; font-weight: bold; }
+  .print-item { margin-bottom: 14px; }
+  .print-item-header { display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; }
+}
+
+@media (max-width: 768px) {
+  .user-name { font-size: 1.3rem; }
+  .card-wrapper { width: 300px; }
+  #node-0 { left: 40px; }
+  #node-1 { left: 380px; }
+  #node-2 { left: 720px; }
+  #node-3 { left: 1060px; }
+  :root { --timeline-width: 1440px; }
+}
