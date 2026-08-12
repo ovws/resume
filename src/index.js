@@ -1,26 +1,15 @@
-const editBtn = document.querySelector(".edit")
-const statement = document.querySelector(".statement .title")
-const detail = document.querySelector(".statement .detail")
+const editButton = document.querySelector(".edit")
 const updateTime = document.querySelector("#updateTime")
 
-console.log(updateTime);
-updateTime.innerHTML=`2024-03-10 12:00:00`
-editBtn.onclick = function () {
-  if (document.designMode === "off") {
-    document.designMode = "on"
-    this.className = "btn2 onEdit"
-    this.innerText = "退出编辑"
-  } else {
-    document.designMode = "off"
-    this.className = "btn2 edit"
-    this.innerText = "编辑"
-  }
-
+if (updateTime) {
+  updateTime.textContent = "2026-08-12"
 }
 
-// statement.onclick = function () {
-//   detail.classList.toggle('hidden');
-// }
-
-// import htmlToPdf from './utils/htmlToPdf'
-// console.log(htmlToPdf);
+if (editButton) {
+  editButton.addEventListener("click", () => {
+    const isEditing = document.designMode === "on"
+    document.designMode = isEditing ? "off" : "on"
+    editButton.classList.toggle("on-edit", !isEditing)
+    editButton.textContent = isEditing ? "编辑页面" : "退出编辑"
+  })
+}
