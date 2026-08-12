@@ -46,7 +46,7 @@
 </head>
 <body>
   <main class="device">
-    <iframe id="mobile-qa-frame" src="./?qa=mobile" title="390 by 844 mobile preview"></iframe>
+    <iframe id="mobile-qa-frame" data-src="./?qa=mobile" title="390 by 844 mobile preview"></iframe>
   </main>
   <pre id="qa-results">waiting</pre>
   <script>
@@ -88,6 +88,7 @@
     }
 
     frame.addEventListener('load', runChecks, { once: true });
+    frame.src = frame.dataset.src;
   </script>
 </body>
 </html>
