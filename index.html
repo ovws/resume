@@ -63,7 +63,7 @@
       <div class="timeline-viewport-track" id="timeline-viewport">
         <div class="timeline-inner-track" id="timeline-track">
 
-          <!-- SVG Vector Layer: Vibrant Colorful Gradient Axis & Connectors & Dots ON THE LINE -->
+          <!-- SVG Vector Layer: Guaranteed 50% Centered Vibrant Gradient Axis Line -->
           <svg class="kbg-svg" id="timeline-svg">
             <defs>
               <linearGradient id="colorAxisGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -75,16 +75,16 @@
               </linearGradient>
 
               <linearGradient id="colorAxisGlow" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(245, 158, 11, 0.25)" />
-                <stop offset="50%" stop-color="rgba(2, 132, 199, 0.25)" />
-                <stop offset="100%" stop-color="rgba(37, 99, 235, 0.25)" />
+                <stop offset="0%" stop-color="rgba(245, 158, 11, 0.3)" />
+                <stop offset="50%" stop-color="rgba(2, 132, 199, 0.3)" />
+                <stop offset="100%" stop-color="rgba(37, 99, 235, 0.3)" />
               </linearGradient>
             </defs>
 
-            <!-- Glow line behind -->
-            <line id="svg-timeline-axis-glow" x1="0" y1="0" x2="2200" y2="0" stroke="url(#colorAxisGlow)" stroke-width="16" stroke-linecap="round" />
-            <!-- Primary Vibrant Colorful Gradient Axis Line -->
-            <line id="svg-timeline-axis" x1="0" y1="0" x2="2200" y2="0" stroke="url(#colorAxisGrad)" stroke-width="7" stroke-linecap="round" />
+            <!-- Glow line behind (18px wide opacity 0.3) -->
+            <line id="svg-timeline-axis-glow" x1="0%" y1="50%" x2="100%" y2="50%" stroke="url(#colorAxisGlow)" stroke-width="18" stroke-linecap="round" />
+            <!-- Primary Vibrant Gradient Timeline Axis Line (8px wide) -->
+            <line id="svg-timeline-axis" x1="0%" y1="50%" x2="100%" y2="50%" stroke="url(#colorAxisGrad)" stroke-width="8" stroke-linecap="round" />
             
             <g id="svg-connectors"></g>
             <g id="svg-dots"></g>

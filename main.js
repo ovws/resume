@@ -1,5 +1,5 @@
 /**
- * Symmetrical 100vh Timeline Engine - Colorful Gradient Axis Bar & TXHuaGuan Font Support
+ * Symmetrical 100vh Timeline Engine - Dynamic Geometry & Vibrant Axis Line
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,14 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
   let initialScrollLeft = 0;
 
   /* --------------------------------------------------------------------------
-     1. Vibrant Colorful Gradient Axis Line & Connectors (Symmetrical Geometry)
+     1. Vector Axis Line & Connectors (Symmetrical Geometry)
      -------------------------------------------------------------------------- */
   function renderTimelineVectors() {
     if (!timelineWrapper || !timelineSvg) return;
 
     const totalWidth = timelineViewport.offsetWidth || 2200;
-    const wrapperHeight = timelineWrapper.offsetHeight || 380;
-    const axisY = wrapperHeight / 2; // Vertical center of timeline wrapper
+    const wrapperHeight = timelineWrapper.clientHeight || timelineWrapper.offsetHeight || 380;
+    const axisY = wrapperHeight > 0 ? wrapperHeight / 2 : 190;
 
     timelineSvg.setAttribute('viewBox', `0 0 ${totalWidth} ${wrapperHeight}`);
     
@@ -53,13 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
     cardWrappers.forEach((node, idx) => {
       const isTopCard = node.classList.contains('card-top');
       const dotX = node.offsetLeft + node.offsetWidth / 2;
-      const dotY = axisY; // Centered on axis!
+      const dotY = axisY; // Centered on timeline axis!
 
       // Top cards bottom edge sits at (axisY - 28px)
       // Bottom cards top edge sits at (axisY + 28px)
       const cardEdgeY = isTopCard ? axisY - 28 : axisY + 28;
 
-      // Symmetrical vertical dashed connector line
+      // Vertical connector line from Dot ON THE LINE to Card edge
       const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
       line.setAttribute('x1', dotX);
       line.setAttribute('y1', dotY);
@@ -112,7 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Render immediately and again after load to guarantee height calculation
   renderTimelineVectors();
+  window.addEventListener('load', renderTimelineVectors);
+  setTimeout(renderTimelineVectors, 100);
+
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Single Viewport 100vh Layout with Custom Font & Colorful Axis Bar
+   Single Viewport 100vh Layout with Custom Font & Guaranteed Axis Bar
    ========================================================================== */
 
 /* Custom Font Declaration */
@@ -183,7 +183,23 @@ html, body {
   height: 100%;
 }
 
-/* SVG Vector Overlay with Vibrant Gradient Axis */
+/* Guaranteed Vibrant Gradient Timeline Axis Line via CSS ::before */
+.timeline-inner-track::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, #f59e0b, #ef4444 25%, #0284c7 50%, #10b981 75%, #2563eb 100%);
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.25);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* SVG Vector Overlay */
 .kbg-svg {
   position: absolute;
   top: 0;
@@ -191,7 +207,7 @@ html, body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 .svg-dot-group {
@@ -211,7 +227,7 @@ html, body {
   position: relative;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  z-index: 3;
 }
 
 .card-wrapper {
