@@ -34,61 +34,194 @@
 
     <section class="timeline" aria-labelledby="timeline-title">
       <div class="timeline-heading">
-        <span class="timeline-label">CAREER TIMELINE</span>
-        <h2 id="timeline-title">工作经历</h2>
+        <div>
+          <span class="timeline-label">EXPERIENCE TIMELINE</span>
+          <h2 id="timeline-title">个人经历</h2>
+        </div>
+        <div class="timeline-metrics" aria-label="时间轴统计">
+          <span>4 条主线</span>
+          <span>12 个阶段节点</span>
+          <span>2022 — 2026</span>
+        </div>
       </div>
 
-      <div class="timeline-list">
-        <article class="timeline-entry current">
-          <time datetime="2024-12">2024.12 — 2026.07</time>
-          <span class="timeline-dot" aria-hidden="true"></span>
-          <div class="entry-content">
-            <p class="entry-type">WORK / TENCENT</p>
-            <h3>腾讯</h3>
-            <p class="entry-role">运维工程师</p>
-            <p class="entry-summary">负责容器平台、流水线平台与镜像管理平台的日常运维，支撑应用交付、故障排查、监控告警和变更发布，保障云原生平台稳定运行。</p>
-          </div>
-        </article>
+      <p class="timeline-lead">从校园基础、现场系统、私有云，到云原生平台，把每段经历拆成可追踪的能力节点：网络与系统、容器与交付、监控与稳定性。</p>
 
-        <article class="timeline-entry">
-          <time datetime="2023-06">2023.06 — 2023.10</time>
-          <span class="timeline-dot" aria-hidden="true"></span>
-          <div class="entry-content">
-            <p class="entry-type">WORK / TENCENT CLOUD</p>
-            <h3>腾讯云</h3>
-            <p class="entry-role">TKE 运维工程师</p>
-            <p class="entry-summary">参与腾讯云平台工单与 TKE 专项支持，处理容器化应用异常、平台故障和域名类问题，使用 Linux、Docker、Kubernetes、Ansible 完成运维工作。</p>
-          </div>
-        </article>
-
-        <article class="timeline-entry">
-          <time datetime="2022-07">2022.07 — 2023.01</time>
-          <span class="timeline-dot" aria-hidden="true"></span>
-          <div class="entry-content">
-            <p class="entry-type">WORK / OPERATIONS</p>
-            <h3>深圳市平方科技股份有限公司</h3>
-            <p class="entry-role">运维工程师</p>
-            <p class="entry-summary">负责港口闸口、岸桥及智能理货系统的网络部署、软件调试、故障处理和现场维护，积累网络、VPN、数据库与系统实施经验。</p>
-          </div>
-        </article>
-
-        <article class="timeline-entry">
-          <time datetime="2022-02">2022.02 — 2022.06</time>
-          <span class="timeline-dot" aria-hidden="true"></span>
-          <div class="entry-content">
-            <p class="entry-type">WORK / PRIVATE CLOUD</p>
-            <h3>河南龙翼信息技术有限公司</h3>
-            <p class="entry-role">云运维工程师</p>
-            <p class="entry-summary">参与中原数据基地与中国联通私有云运维，负责操作系统、虚拟化、容器、网络、安全、监控和自动化相关工作。</p>
-          </div>
-        </article>
+      <div class="timeline-legend" aria-label="时间轴图例">
+        <span><i class="legend-dot education" aria-hidden="true"></i>教育基础</span>
+        <span><i class="legend-dot field" aria-hidden="true"></i>现场运维</span>
+        <span><i class="legend-dot private-cloud" aria-hidden="true"></i>私有云</span>
+        <span><i class="legend-dot tencent" aria-hidden="true"></i>腾讯 · 云原生</span>
       </div>
+
+      <div class="timeline-viewport" tabindex="0" aria-label="个人经历波浪形横向时间轴">
+        <div class="timeline-stage">
+          <canvas class="timeline-wave" aria-hidden="true"></canvas>
+
+          <article class="timeline-entry education up major" style="--x: 5.5%;">
+            <div class="entry-anchor">
+              <time datetime="2022">2022 — 2025</time>
+              <span class="timeline-dot" aria-hidden="true"></span>
+            </div>
+            <div class="entry-content">
+              <p class="entry-type">01 / EDUCATION</p>
+              <h3>计算机基础</h3>
+              <p class="entry-role">重庆移通学院 · 计算机科学与技术</p>
+              <p class="entry-summary">围绕计算机网络、操作系统、数据库与软件工程建立基础知识框架。</p>
+            </div>
+          </article>
+
+          <article class="timeline-entry education down" style="--x: 13.6%;">
+            <div class="entry-anchor">
+              <time datetime="2023">阶段 02</time>
+              <span class="timeline-dot" aria-hidden="true"></span>
+            </div>
+            <div class="entry-content">
+              <p class="entry-type">02 / EDUCATION</p>
+              <h3>网络与系统</h3>
+              <p class="entry-role">课程 · 实训 · 自我驱动</p>
+              <p class="entry-summary">把 Linux、网络与脚本能力用于课程实践，形成问题定位和文档化习惯。</p>
+            </div>
+          </article>
+
+          <article class="timeline-entry education up" style="--x: 21.7%;">
+            <div class="entry-anchor">
+              <time datetime="2025">2025</time>
+              <span class="timeline-dot" aria-hidden="true"></span>
+            </div>
+            <div class="entry-content">
+              <p class="entry-type">03 / EDUCATION</p>
+              <h3>毕业成果</h3>
+              <p class="entry-role">计算机科学与技术 · 专科</p>
+              <p class="entry-summary">2025 年毕业，GPA 3.85（前 10%），向云平台与运维方向持续聚焦。</p>
+            </div>
+          </article>
+
+          <article class="timeline-entry field down" style="--x: 29.8%;">
+            <div class="entry-anchor">
+              <time datetime="2022-07">2022.07 — 2023.01</time>
+              <span class="timeline-dot" aria-hidden="true"></span>
+            </div>
+            <div class="entry-content">
+              <p class="entry-type">04 / FIELD OPS</p>
+              <h3>现场部署</h3>
+              <p class="entry-role">深圳市平方科技 · 运维工程师</p>
+              <p class="entry-summary">参与港口闸口、岸桥及智能理货系统的网络部署和上线准备。</p>
+            </div>
+          </article>
+
+          <article class="timeline-entry field up" style="--x: 37.9%;">
+            <div class="entry-anchor">
+              <time datetime="2022-10">阶段 05</time>
+              <span class="timeline-dot" aria-hidden="true"></span>
+            </div>
+            <div class="entry-content">
+              <p class="entry-type">05 / FIELD OPS</p>
+              <h3>系统调试</h3>
+              <p class="entry-role">网络 · VPN · 现场联调</p>
+              <p class="entry-summary">完成软件调试、VPN 联通与现场联调，协同处理设备和系统问题。</p>
+            </div>
+          </article>
+
+          <article class="timeline-entry field down" style="--x: 46%;">
+            <div class="entry-anchor">
+              <time datetime="2023-01">2023.01</time>
+              <span class="timeline-dot" aria-hidden="true"></span>
+            </div>
+            <div class="entry-content">
+              <p class="entry-type">06 / FIELD OPS</p>
+              <h3>故障闭环</h3>
+              <p class="entry-role">数据库 · 网络 · 应用支持</p>
+              <p class="entry-summary">处理数据库、网络及应用故障，沉淀现场维护和跨团队排障经验。</p>
+            </div>
+          </article>
+
+          <article class="timeline-entry private-cloud up" style="--x: 54.1%;">
+            <div class="entry-anchor">
+              <time datetime="2023-02">2023.02 — 2023.09</time>
+              <span class="timeline-dot" aria-hidden="true"></span>
+            </div>
+            <div class="entry-content">
+              <p class="entry-type">07 / PRIVATE CLOUD</p>
+              <h3>私有云接管</h3>
+              <p class="entry-role">河南龙翼信息技术 · 云运维工程师</p>
+              <p class="entry-summary">参与中原数据基地与中国联通私有云运维，覆盖 Linux、虚拟化和基础资源。</p>
+            </div>
+          </article>
+
+          <article class="timeline-entry private-cloud down" style="--x: 62.2%;">
+            <div class="entry-anchor">
+              <time datetime="2023-05">阶段 08</time>
+              <span class="timeline-dot" aria-hidden="true"></span>
+            </div>
+            <div class="entry-content">
+              <p class="entry-type">08 / PRIVATE CLOUD</p>
+              <h3>容器与网络</h3>
+              <p class="entry-role">容器 · 网络 · 安全</p>
+              <p class="entry-summary">参与容器、网络与安全相关运维，定位平台连通性和运行异常。</p>
+            </div>
+          </article>
+
+          <article class="timeline-entry private-cloud up" style="--x: 70.3%;">
+            <div class="entry-anchor">
+              <time datetime="2023-09">2023.09</time>
+              <span class="timeline-dot" aria-hidden="true"></span>
+            </div>
+            <div class="entry-content">
+              <p class="entry-type">09 / PRIVATE CLOUD</p>
+              <h3>监控与自动化</h3>
+              <p class="entry-role">监控 · 自动化 · 故障复盘</p>
+              <p class="entry-summary">参与监控、自动化和变更执行，推动故障发现、处理与复盘闭环。</p>
+            </div>
+          </article>
+
+          <article class="timeline-entry tencent down current major" style="--x: 78.4%;">
+            <div class="entry-anchor">
+              <time datetime="2024-12">2024.12 — 2026.07</time>
+              <span class="timeline-dot" aria-hidden="true"></span>
+            </div>
+            <div class="entry-content">
+              <p class="entry-type">10 / TENCENT</p>
+              <h3>容器平台</h3>
+              <p class="entry-role">腾讯 · 运维工程师</p>
+              <p class="entry-summary">负责容器平台日常运维，支撑应用部署、资源巡检、问题排查与稳定性保障。</p>
+            </div>
+          </article>
+
+          <article class="timeline-entry tencent up" style="--x: 86.5%;">
+            <div class="entry-anchor">
+              <time datetime="2025">阶段 11</time>
+              <span class="timeline-dot" aria-hidden="true"></span>
+            </div>
+            <div class="entry-content">
+              <p class="entry-type">11 / TENCENT</p>
+              <h3>流水线平台</h3>
+              <p class="entry-role">CI/CD · 构建 · 发布</p>
+              <p class="entry-summary">负责流水线平台运维，支撑构建、发布、权限与变更流程，提升交付可用性。</p>
+            </div>
+          </article>
+
+          <article class="timeline-entry tencent down" style="--x: 94.5%;">
+            <div class="entry-anchor">
+              <time datetime="2026-07">2026.07</time>
+              <span class="timeline-dot" aria-hidden="true"></span>
+            </div>
+            <div class="entry-content">
+              <p class="entry-type">12 / TENCENT</p>
+              <h3>镜像与治理</h3>
+              <p class="entry-role">镜像管理 · 平台稳定性</p>
+              <p class="entry-summary">负责镜像管理平台运维，覆盖镜像生命周期、仓库使用、风险排查与发布保障。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+      <p class="timeline-scroll-note">左右滑动或拖拽查看完整波浪时间轴</p>
     </section>
 
     <footer class="timeline-footer">
       <div>
-        <span class="footer-label">EDUCATION</span>
-        <p>重庆移通学院 · 计算机科学与技术 · 专科 · 2025 年毕业</p>
+        <span class="footer-label">CAREER FOCUS</span>
+        <p>平台运维 · 容器化交付 · 故障排查 · 自动化运维</p>
       </div>
       <div>
         <span class="footer-label">SKILLS</span>
@@ -96,6 +229,6 @@
       </div>
     </footer>
   </main>
+  <script src="./index.js"></script>
 </body>
-
 </html>
