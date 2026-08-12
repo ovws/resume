@@ -149,6 +149,14 @@ a:hover {
   font-weight: 700;
 }
 
+.timeline-lead {
+  max-width: 670px;
+  margin: -26px 0 46px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
 .timeline-list {
   position: relative;
   padding-left: 184px;
@@ -291,6 +299,11 @@ a:hover {
     flex-direction: column-reverse;
     gap: 4px;
     margin-bottom: 38px;
+  }
+
+  .timeline-lead {
+    margin: -18px 0 34px;
+    font-size: 13px;
   }
 
   .timeline-list {
