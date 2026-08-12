@@ -436,10 +436,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetRect = targetNode.getBoundingClientRect();
         const targetTop = window.scrollY + targetRect.top;
         const centeredScrollTop = targetTop - Math.max(0, (window.innerHeight - targetRect.height) / 2);
-        window.scrollTo({
-          top: Math.max(0, centeredScrollTop),
-          behavior: 'smooth'
-        });
+        const scrollRoot = document.scrollingElement || document.documentElement;
+        scrollRoot.scrollTop = Math.max(0, centeredScrollTop);
         return;
       }
 
