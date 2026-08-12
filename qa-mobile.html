@@ -57,12 +57,20 @@
 
     async function runChecks() {
       if (hasRun) return;
-      await wait(250);
+      let frameDocument;
+      for (let attempt = 0; attempt < 40; attempt += 1) {
+        frameDocument = frame.contentDocument;
+        if (frameDocument?.querySelector('.app-viewport')) break;
+        await wait(100);
+      }
 
-      const frameWindow = frame.contentWindow;
-      const frameDocument = frame.contentDocument;
-      if (!frameDocument?.querySelector('.app-viewport')) return;
+      if (!frameDocument?.querySelector('.app-viewport')) {
+        output.textContent = 'mobile app did not load';
+        return;
+      }
+
       hasRun = true;
+      const frameWindow = frame.contentWindow;
       const tencentButton = frameDocument.querySelector('.nav-node-btn[data-target="3"]');
       const languageButton = frameDocument.getElementById('btn-lang');
 
@@ -88,8 +96,8 @@
       }, null, 2);
     }
 
-    frame.addEventListener('load', runChecks);
     frame.src = frame.dataset.src;
+    runChecks();
   </script>
 </body>
 </html>
