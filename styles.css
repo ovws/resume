@@ -984,7 +984,7 @@ body::after {
     width: 100%;
     height: auto;
     min-height: 100dvh;
-    padding-bottom: 74px;
+    padding-bottom: calc(74px + min(24vh, 200px));
     overflow: visible;
   }
 

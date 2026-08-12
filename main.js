@@ -430,6 +430,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!targetNode) return;
 
       if (isMobileTimeline()) {
+        navBtns.forEach((navBtn, idx) => {
+          navBtn.classList.toggle('active', idx === targetIdx);
+        });
         targetNode.scrollIntoView({
           behavior: 'smooth',
           block: 'center'

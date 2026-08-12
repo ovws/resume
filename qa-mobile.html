@@ -28,6 +28,19 @@
       transform: scale(0.8);
       transform-origin: top left;
     }
+    #qa-results {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      width: 360px;
+      margin: 0;
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.92);
+      color: #dbeafe;
+      font: 12px/1.5 monospace;
+      white-space: pre-wrap;
+    }
   </style>
   <script>localStorage.setItem('lang', 'en');</script>
 </head>
@@ -35,5 +48,46 @@
   <main class="device">
     <iframe id="mobile-qa-frame" src="./?qa=mobile" title="390 by 844 mobile preview"></iframe>
   </main>
+  <pre id="qa-results">waiting</pre>
+  <script>
+    const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+    const frame = document.getElementById('mobile-qa-frame');
+    const output = document.getElementById('qa-results');
+    let hasRun = false;
+
+    async function runChecks() {
+      if (hasRun) return;
+      hasRun = true;
+      await wait(250);
+
+      const frameWindow = frame.contentWindow;
+      const frameDocument = frame.contentDocument;
+      const tencentButton = frameDocument.querySelector('.nav-node-btn[data-target="3"]');
+      const languageButton = frameDocument.getElementById('btn-lang');
+
+      tencentButton.click();
+      await wait(1300);
+
+      const targetRect = frameDocument.getElementById('node-3').getBoundingClientRect();
+      const navigation = {
+        scrollY: Math.round(frameWindow.scrollY),
+        targetTop: Math.round(targetRect.top),
+        active: frameDocument.querySelector('.nav-node-btn.active')?.innerText.trim()
+      };
+
+      languageButton.click();
+      await wait(150);
+
+      output.textContent = JSON.stringify({
+        navigation,
+        language: {
+          name: frameDocument.getElementById('hero-name')?.textContent,
+          button: languageButton.innerText.trim()
+        }
+      }, null, 2);
+    }
+
+    frame.addEventListener('load', runChecks, { once: true });
+  </script>
 </body>
 </html>
