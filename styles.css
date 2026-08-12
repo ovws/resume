@@ -200,6 +200,7 @@ html, body {
 
 .chip-phone svg { color: #16a34a; }
 .chip-mail svg { color: var(--kbg-blue); }
+.chip-blog svg { color: var(--kbg-teal); }
 .chip-github svg { color: #1f2937; }
 
 .chip-primary {
