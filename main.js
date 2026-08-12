@@ -1,5 +1,5 @@
 /**
- * Deluxe Symmetrical 100vh Timeline Engine with i18n & Rich Aesthetic Polish
+ * Responsive Timeline Engine with i18n & Rich Aesthetic Polish
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const navBtns = document.querySelectorAll('.nav-node-btn');
   const pdfBtn = document.getElementById('btn-pdf');
   const langBtn = document.getElementById('btn-lang');
+  const mobileTimelineQuery = window.matchMedia('(max-width: 768px)');
+  const isMobileTimeline = () => mobileTimelineQuery.matches;
 
   // Language State: Default 'zh', persists in localStorage
   let currentLang = localStorage.getItem('lang') || 'zh';
@@ -209,6 +211,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderTimelineVectors() {
     if (!timelineWrapper || !timelineSvg) return;
 
+    if (isMobileTimeline()) {
+      svgConnectors.innerHTML = '';
+      svgDots.innerHTML = '';
+      return;
+    }
+
     const totalWidth = timelineViewport.offsetWidth || 2200;
     const wrapperHeight = timelineWrapper.clientHeight || timelineWrapper.offsetHeight || 380;
     const axisY = wrapperHeight > 0 ? wrapperHeight / 2 : 190;
@@ -300,12 +308,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial i18n Application & Vector Render
   applyLanguage(currentLang);
   renderTimelineVectors();
+  if (isMobileTimeline()) updateActiveNavOnScroll();
   window.addEventListener('load', renderTimelineVectors);
 
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(renderTimelineVectors, 80);
+    resizeTimer = setTimeout(() => {
+      if (isMobileTimeline()) timelineWrapper.scrollLeft = 0;
+      renderTimelineVectors();
+      updateActiveNavOnScroll();
+    }, 80);
   });
 
   /* --------------------------------------------------------------------------
@@ -316,6 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let initialScrollLeft = 0;
 
   timelineWrapper.addEventListener('mousedown', (e) => {
+    if (isMobileTimeline()) return;
     if (e.target.closest('a, button, .kbg-card')) return;
     isDown = true;
     startX = e.pageX - timelineWrapper.offsetLeft;
@@ -331,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   timelineWrapper.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
+    if (!isDown || isMobileTimeline()) return;
     e.preventDefault();
     const x = e.pageX - timelineWrapper.offsetLeft;
     const walk = (x - startX) * 1.3;
@@ -340,6 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Wheel Horizontal Scroll
   timelineWrapper.addEventListener('wheel', (e) => {
+    if (isMobileTimeline()) return;
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
       e.preventDefault();
       timelineWrapper.scrollLeft += e.deltaY * 0.9;
@@ -348,23 +363,40 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: false });
 
   timelineWrapper.addEventListener('scroll', updateActiveNavOnScroll, { passive: true });
+  window.addEventListener('scroll', () => {
+    if (isMobileTimeline()) updateActiveNavOnScroll();
+  }, { passive: true });
 
   function updateActiveNavOnScroll() {
-    const scrollPos = timelineWrapper.scrollLeft;
-    const wrapperWidth = timelineWrapper.offsetWidth;
-    const centerPos = scrollPos + wrapperWidth / 2;
-
     let closestIdx = 0;
     let minDistance = Infinity;
 
-    cardWrappers.forEach((node, idx) => {
-      const nodeCenter = node.offsetLeft + node.offsetWidth / 2;
-      const distance = Math.abs(centerPos - nodeCenter);
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIdx = idx;
-      }
-    });
+    if (isMobileTimeline()) {
+      const viewportCenter = window.innerHeight / 2;
+
+      cardWrappers.forEach((node, idx) => {
+        const rect = node.getBoundingClientRect();
+        const nodeCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(viewportCenter - nodeCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIdx = idx;
+        }
+      });
+    } else {
+      const scrollPos = timelineWrapper.scrollLeft;
+      const wrapperWidth = timelineWrapper.offsetWidth;
+      const centerPos = scrollPos + wrapperWidth / 2;
+
+      cardWrappers.forEach((node, idx) => {
+        const nodeCenter = node.offsetLeft + node.offsetWidth / 2;
+        const distance = Math.abs(centerPos - nodeCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIdx = idx;
+        }
+      });
+    }
 
     navBtns.forEach((btn, idx) => {
       if (idx === closestIdx) {
@@ -396,6 +428,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetIdx = parseInt(btn.getAttribute('data-target'), 10);
       const targetNode = document.getElementById(`node-${targetIdx}`);
       if (!targetNode) return;
+
+      if (isMobileTimeline()) {
+        targetNode.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+        return;
+      }
 
       const targetScrollLeft = targetNode.offsetLeft - (timelineWrapper.offsetWidth / 2) + (targetNode.offsetWidth / 2);
       timelineWrapper.scrollTo({
