@@ -57,11 +57,12 @@
 
     async function runChecks() {
       if (hasRun) return;
-      hasRun = true;
       await wait(250);
 
       const frameWindow = frame.contentWindow;
       const frameDocument = frame.contentDocument;
+      if (!frameDocument?.querySelector('.app-viewport')) return;
+      hasRun = true;
       const tencentButton = frameDocument.querySelector('.nav-node-btn[data-target="3"]');
       const languageButton = frameDocument.getElementById('btn-lang');
 
@@ -87,7 +88,7 @@
       }, null, 2);
     }
 
-    frame.addEventListener('load', runChecks, { once: true });
+    frame.addEventListener('load', runChecks);
     frame.src = frame.dataset.src;
   </script>
 </body>
