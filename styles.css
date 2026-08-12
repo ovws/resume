@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Deluxe Killed-by-Google Resume Timeline - Enhanced Styling
+   Deluxe Killed-by-Google Resume Timeline - Enhanced Styling & i18n
    ========================================================================== */
 
 /* Custom Font Declaration */
@@ -198,6 +198,21 @@ html, body {
   transform: translateY(-2px);
 }
 
+.chip-lang {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #cbd5e1;
+  font-weight: 600;
+}
+
+.chip-lang:hover {
+  background: #ffffff;
+  border-color: #2563eb;
+  color: #2563eb;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+.chip-lang svg { color: #0284c7; }
 .chip-phone svg { color: #16a34a; }
 .chip-mail svg { color: var(--kbg-blue); }
 .chip-blog svg { color: var(--kbg-teal); }
