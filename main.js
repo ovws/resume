@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btnLang: "English",
       nodes: [
         {
+          time: "2022 — 2025",
           tag: "教育经历",
           title: "重庆移通学院",
           role: "计算机科学与技术 · 专科",
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
           nav: "重庆移通学院"
         },
         {
+          time: "2022.07 — 2023.01",
           tag: "工作经历",
           title: "深圳市平方科技股份有限公司",
           role: "运维工程师",
@@ -47,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
           nav: "平方科技"
         },
         {
+          time: "2023.02 — 2023.09",
           tag: "工作经历",
           title: "河南龙翼信息技术有限公司",
           role: "云运维工程师",
@@ -55,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
           nav: "龙翼信息"
         },
         {
+          time: "2024.12 — 2026.07",
           tag: "核心经历",
           title: "腾讯",
           role: "运维工程师",
@@ -70,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     },
     en: {
-      name: "WenSong Qi", // Pure English name without Chinese in parentheses!
+      name: "WenSong Qi",
       status: "DevOps & Cloud Native",
       subRowHtml: `<span>Male · Sept 2002</span><span class="dot-divider">•</span><span>Shenzhen, China</span><span class="dot-divider">•</span><span>Chongqing College of Mobile Telecommunications · Computer Science</span>`,
       btnBlog: "Blog",
@@ -78,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btnLang: "中文",
       nodes: [
         {
+          time: "2022 — 2025",
           tag: "Education",
           title: "Chongqing College of Mobile Telecommunications",
           role: "Computer Science and Technology · Associate Degree",
@@ -86,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
           nav: "CQ Mobile Telecom"
         },
         {
+          time: "2022.07 — 2023.01",
           tag: "Work Experience",
           title: "Shenzhen Pingfang Technology Co., Ltd.",
           role: "Operations & Maintenance Engineer",
@@ -94,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
           nav: "Pingfang Tech"
         },
         {
+          time: "2023.02 — 2023.09",
           tag: "Work Experience",
           title: "Henan Longyi Information Technology Co., Ltd.",
           role: "Cloud Operations Engineer",
@@ -102,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
           nav: "Longyi Info"
         },
         {
+          time: "2024.12 — 2026.07",
           tag: "Core Experience",
           title: "Tencent",
           role: "Operations & Maintenance Engineer",
@@ -138,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cards & Nav
     data.nodes.forEach((nodeData, idx) => {
+      const timeEl = document.getElementById(`card-${idx}-time`);
       const tagEl = document.getElementById(`card-${idx}-tag`);
       const titleEl = document.getElementById(`card-${idx}-title`);
       const roleEl = document.getElementById(`card-${idx}-role`);
@@ -145,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const pillsEl = document.getElementById(`card-${idx}-pills`);
       const navEl = document.getElementById(`nav-btn-${idx}`);
 
+      if (timeEl && nodeData.time) timeEl.textContent = nodeData.time;
       if (tagEl) tagEl.textContent = nodeData.tag;
       if (titleEl) titleEl.textContent = nodeData.title;
       if (roleEl) roleEl.textContent = nodeData.role;
