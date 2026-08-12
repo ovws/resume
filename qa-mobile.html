@@ -74,8 +74,12 @@
       const frameWindow = frame.contentWindow;
       const tencentButton = frameDocument.querySelector('.nav-node-btn[data-target="3"]');
       const languageButton = frameDocument.getElementById('btn-lang');
+      const activate = (element) => element.dispatchEvent(new frameWindow.Event('click', {
+        bubbles: true,
+        cancelable: true
+      }));
 
-      tencentButton.click();
+      activate(tencentButton);
       await wait(1300);
 
       const targetRect = frameDocument.getElementById('node-3').getBoundingClientRect();
@@ -85,7 +89,7 @@
         active: frameDocument.querySelector('.nav-node-btn.active')?.innerText.trim()
       };
 
-      languageButton.click();
+      activate(languageButton);
       await wait(150);
 
       output.textContent = JSON.stringify({
