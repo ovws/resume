@@ -433,9 +433,12 @@ document.addEventListener('DOMContentLoaded', () => {
         navBtns.forEach((navBtn, idx) => {
           navBtn.classList.toggle('active', idx === targetIdx);
         });
-        targetNode.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
+        const targetRect = targetNode.getBoundingClientRect();
+        const targetTop = window.scrollY + targetRect.top;
+        const centeredScrollTop = targetTop - Math.max(0, (window.innerHeight - targetRect.height) / 2);
+        window.scrollTo({
+          top: Math.max(0, centeredScrollTop),
+          behavior: 'smooth'
         });
         return;
       }
