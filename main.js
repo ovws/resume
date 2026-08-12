@@ -1,5 +1,5 @@
 /**
- * Deluxe Symmetrical 100vh Timeline Engine with Instant i18n Language Toggle
+ * Deluxe Symmetrical 100vh Timeline Engine with i18n & Rich Aesthetic Polish
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     },
     en: {
-      name: "WenSong Qi (齐文崧)",
+      name: "WenSong Qi", // Pure English name without Chinese in parentheses!
       status: "DevOps & Cloud Native",
       subRowHtml: `<span>Male · Sept 2002</span><span class="dot-divider">•</span><span>Shenzhen, China</span><span class="dot-divider">•</span><span>Chongqing College of Mobile Telecommunications · Computer Science</span>`,
       btnBlog: "Blog",
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pillsEl.innerHTML = '';
         nodeData.pills.forEach(pillText => {
           const span = document.createElement('span');
-          span.className = `pill ${idx === 0 ? 'pill-amber' : idx === 3 ? 'pill-blue' : ''}`;
+          span.className = `pill pill-node-${idx}`;
           span.textContent = pillText;
           pillsEl.appendChild(span);
         });
@@ -222,6 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
     svgConnectors.innerHTML = '';
     svgDots.innerHTML = '';
 
+    const colors = ['#f59e0b', '#0d9488', '#0284c7', '#2563eb'];
+
     cardWrappers.forEach((node, idx) => {
       const isTopCard = node.classList.contains('card-top');
       const dotX = node.offsetLeft + node.offsetWidth / 2;
@@ -237,9 +239,9 @@ document.addEventListener('DOMContentLoaded', () => {
       line.setAttribute('y1', dotY);
       line.setAttribute('x2', dotX);
       line.setAttribute('y2', cardEdgeY);
-      line.setAttribute('stroke', idx === 3 ? '#2563eb' : idx === 0 ? '#d97706' : '#9ca3af');
-      line.setAttribute('stroke-width', '1.5');
-      line.setAttribute('stroke-dasharray', '3 3');
+      line.setAttribute('stroke', colors[idx] || '#2563eb');
+      line.setAttribute('stroke-width', '1.8');
+      line.setAttribute('stroke-dasharray', '4 4');
       svgConnectors.appendChild(line);
 
       // Node Dot Group centered EXACTLY on axis (dotX, axisY)
@@ -247,23 +249,23 @@ document.addEventListener('DOMContentLoaded', () => {
       g.setAttribute('class', 'svg-dot-group');
       g.setAttribute('data-index', idx);
 
-      const color = idx === 0 ? '#d97706' : idx === 3 ? '#2563eb' : '#0284c7';
+      const color = colors[idx] || '#2563eb';
 
       // Outer circle
       const outerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       outerCircle.setAttribute('cx', dotX);
       outerCircle.setAttribute('cy', dotY);
-      outerCircle.setAttribute('r', '9.5');
+      outerCircle.setAttribute('r', '10');
       outerCircle.setAttribute('fill', '#ffffff');
       outerCircle.setAttribute('stroke', color);
-      outerCircle.setAttribute('stroke-width', '2.5');
-      outerCircle.setAttribute('style', 'filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));');
+      outerCircle.setAttribute('stroke-width', '3');
+      outerCircle.setAttribute('style', 'filter: drop-shadow(0 2px 6px rgba(0,0,0,0.12));');
 
       // Inner dot
       const innerDot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       innerDot.setAttribute('cx', dotX);
       innerDot.setAttribute('cy', dotY);
-      innerDot.setAttribute('r', '4');
+      innerDot.setAttribute('r', '4.5');
       innerDot.setAttribute('fill', color);
 
       g.appendChild(outerCircle);
@@ -299,7 +301,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --------------------------------------------------------------------------
      2. Instant Drag-to-Scroll (Stops Instantly Wherever Released)
      -------------------------------------------------------------------------- */
-  // Drag State
   let isDown = false;
   let startX = 0;
   let initialScrollLeft = 0;
