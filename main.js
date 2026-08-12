@@ -1,5 +1,5 @@
 /**
- * Symmetrical 100vh Timeline Engine - Dynamic Geometry & Vibrant Axis Line
+ * Deluxe Symmetrical 100vh Timeline Engine
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -59,13 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
       // Bottom cards top edge sits at (axisY + 28px)
       const cardEdgeY = isTopCard ? axisY - 28 : axisY + 28;
 
-      // Vertical connector line from Dot ON THE LINE to Card edge
+      // Vertical dashed connector line
       const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
       line.setAttribute('x1', dotX);
       line.setAttribute('y1', dotY);
       line.setAttribute('x2', dotX);
       line.setAttribute('y2', cardEdgeY);
-      line.setAttribute('stroke', idx === 3 ? '#1a73e8' : idx === 0 ? '#d97706' : '#bdc1c6');
+      line.setAttribute('stroke', idx === 3 ? '#2563eb' : idx === 0 ? '#d97706' : '#9ca3af');
       line.setAttribute('stroke-width', '1.5');
       line.setAttribute('stroke-dasharray', '3 3');
       svgConnectors.appendChild(line);
@@ -75,22 +75,23 @@ document.addEventListener('DOMContentLoaded', () => {
       g.setAttribute('class', 'svg-dot-group');
       g.setAttribute('data-index', idx);
 
-      const color = idx === 0 ? '#d97706' : idx === 3 ? '#1a73e8' : '#0284c7';
+      const color = idx === 0 ? '#d97706' : idx === 3 ? '#2563eb' : '#0284c7';
 
       // Outer circle
       const outerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       outerCircle.setAttribute('cx', dotX);
       outerCircle.setAttribute('cy', dotY);
-      outerCircle.setAttribute('r', '9');
+      outerCircle.setAttribute('r', '9.5');
       outerCircle.setAttribute('fill', '#ffffff');
       outerCircle.setAttribute('stroke', color);
       outerCircle.setAttribute('stroke-width', '2.5');
+      outerCircle.setAttribute('style', 'filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));');
 
       // Inner dot
       const innerDot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       innerDot.setAttribute('cx', dotX);
       innerDot.setAttribute('cy', dotY);
-      innerDot.setAttribute('r', '3.5');
+      innerDot.setAttribute('r', '4');
       innerDot.setAttribute('fill', color);
 
       g.appendChild(outerCircle);
@@ -112,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Render immediately and again after load to guarantee height calculation
   renderTimelineVectors();
   window.addEventListener('load', renderTimelineVectors);
   setTimeout(renderTimelineVectors, 100);
